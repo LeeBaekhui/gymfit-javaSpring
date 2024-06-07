@@ -1,6 +1,7 @@
 package gymfit.gymfit.kr.model;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -45,9 +46,6 @@ public class Member {
     private Float bmi;
 
     @Column(nullable = false)
-    private String lockerNumber;
-
-    @Column(nullable = false)
     private String handler;
 
     @Column(nullable = false)
@@ -66,5 +64,8 @@ public class Member {
     @Lob
     @Column(columnDefinition = "MEDIUMBLOB")
     private byte[] profileImage;
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Locker> lockers;
 
 }
